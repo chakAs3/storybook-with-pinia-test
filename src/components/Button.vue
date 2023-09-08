@@ -27,7 +27,6 @@ const handlePress = (event) => {
 
 <style lang="scss" module>
 .button {
-  // prettier-ignore
   --height: 32px;
 
   height: var(--height);
@@ -36,7 +35,6 @@ const handlePress = (event) => {
   color: #063;
   cursor: pointer;
   user-select: none;
-  // prettier-ignore
   border: 1px solid currentColor;
   border-radius: calc(var(--height) / 2);
 

@@ -1,9 +1,6 @@
 /** @type { import('@storybook/vue3-webpack5').StorybookConfig } */
 
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 
 const config = {
   stories: ['../components/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -40,7 +37,6 @@ const config = {
           {
             test: /\.css$/,
             use: [
-              MiniCssExtractPlugin.loader,
               {
                 loader: 'css-loader',
                 options: {
@@ -53,7 +49,6 @@ const config = {
             test: /\.scss$/,
             exclude: /node_modules/,
             use: [
-              MiniCssExtractPlugin.loader,
               {
                 loader: 'css-loader',
                 options: {
@@ -69,48 +64,11 @@ const config = {
                 options: {}
               }
             ]
-          },
-          {
-            test: /\.(png|jpe?g|gif)$/i,
-            use: [
-              {
-                loader: 'file-loader'
-              }
-            ]
           }
         ]
       },
 
-      plugins: [...config.plugins, new MiniCssExtractPlugin()],
-
-      optimization: {
-        ...config.optimization,
-        minimize: true,
-        minimizer: [
-          new TerserPlugin({
-            terserOptions: {
-              compress: {
-                drop_debugger: false,
-                drop_console: false
-              },
-              output: {
-                comments: false
-              }
-            },
-            extractComments: false
-          }),
-          new CssMinimizerPlugin({
-            minimizerOptions: {
-              preset: [
-                'default',
-                {
-                  discardComments: { removeAll: true }
-                }
-              ]
-            }
-          })
-        ]
-      }
+      plugins: [...config.plugins]
     };
   }
 };
